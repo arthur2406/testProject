@@ -5,12 +5,12 @@ const mongoose = require('mongoose');
 
 //Creating a lesson schema
 const lessonSchema = new mongoose.Schema({
-  topic: {
+  name: {
     type: String,
     required: true,
     trim: true
   },
-  lecturer: {
+  teacher: {
     type: String,
     required: true,
   },
