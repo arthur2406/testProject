@@ -1,31 +1,24 @@
 'use strict';
 
 const express = require('express');
-const { createAndGetStudent,
-  loginAndGetStudent,
-  logoutStudent,
-  logoutAllStudent,
-  getStudent,
-  updateStudent,
-  deleteStudent } = require('../../controllers/studentController');
-
+const studentController = require('../../controllers/studentController');
 const auth = require('../middleware/auth');
 
 const router = new express.Router();
 
-router.post('/students', createAndGetStudent);
+router.post('/students', studentController.createAndGetStudent);
 
-router.post('/students/login', loginAndGetStudent);
+router.post('/students/login', studentController.loginAndGetStudent);
 
-router.post('/students/logout', auth, logoutStudent);
+router.post('/students/logout', auth.studentAuth, studentController.logoutStudent);
 
 //logs out from all devices
-router.post('/students/logout', auth, logoutAllStudent);
+router.post('/students/logout', auth.studentAuth, studentController.logoutAllStudent);
 
-router.get('/students/me', auth, getStudent);
+router.get('/students/me', auth.studentAuth, studentController.getStudent);
 
-router.patch('/students/me', auth, updateStudent);
+router.patch('/students/me', auth.studentAuth, studentController.updateStudent);
 
-router.delete('/students/me', auth, deleteStudent);
+router.delete('/students/me', auth.studentAuth, studentController.deleteStudent);
 
 module.exports = router;

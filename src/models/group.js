@@ -12,6 +12,10 @@ const groupSchema = mongoose.Schema({
   lessons: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Lesson'
+  }],
+  students: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Student'
   }]
 });
 

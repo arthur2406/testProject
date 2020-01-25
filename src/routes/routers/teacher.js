@@ -1,31 +1,24 @@
 'use strict';
 
 const express = require('express');
-const { createAndGetTeacher,
-  loginAndGetTeacher,
-  logoutTeacher,
-  logoutAllTeacher,
-  getTeacher,
-  updateTeacher,
-  deleteTeacher } = require('../../controllers/TeacherController');
-
-const auth = require('../middleware/auth');
+const teacherController = require('../../controllers/teacherController');
+const auth = require('../middleware/auth.teacherAuth');
 
 const router = new express.Router();
 
-router.post('/teachers', createAndGetTeacher);
+router.post('/teachers', teacherController.createAndGetTeacher);
 
-router.post('/teachers/login', loginAndGetTeacher);
+router.post('/teachers/login', teacherController.loginAndGetTeacher);
 
-router.post('/teachers/logout', auth, logoutTeacher);
+router.post('/teachers/logout', auth.teacherAuth, teacherController.logoutTeacher);
 
 //logs out from all devices
-router.post('/teachers/logout', auth, logoutAllTeacher);
+router.post('/teachers/logout', auth.teacherAuth, teacherController.logoutAllTeacher);
 
-router.get('/teachers/me', auth, getTeacher);
+router.get('/teachers/me', auth.teacherAuth, teacherController.getTeacher);
 
-router.patch('/teachers/me', auth, updateTeacher);
+router.patch('/teachers/me', auth.teacherAuth, teacherController.updateTeacher);
 
-router.delete('/teachers/me', auth, deleteTeacher);
+router.delete('/teachers/me', auth.teacherAuth, teacherController.deleteTeacher);
 
 module.exports = router;
