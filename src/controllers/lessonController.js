@@ -1,6 +1,6 @@
 'use strict';
 
-const { fetchLessons, fetchLessonById, createLesson, updateLesson, deleteLesson } = require('../db/mongoose');
+const { fetchLessons, fetchLessonById, createLesson, updateLesson, deleteLesson } = require('../db/lessonDB');
 
 exports.getLessons = async (req, res) => {
   try {

@@ -1,6 +1,6 @@
 'use strict';
 
-const { createGroup, fetchGroups, fetchGroupById, updateGroup, deleteGroup } = require('../db/mongoose');
+const { createGroup, fetchGroups, fetchGroupById, updateGroup, deleteGroup } = require('../db/groupDB');
 
 exports.createAndGetGroup = async (req, res) => {
   try {

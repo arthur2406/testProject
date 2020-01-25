@@ -6,7 +6,8 @@ const Lesson = require('../models/lesson');
 const groupSchema = mongoose.Schema({
   name: {
     type: String,
-    required: true
+    required: true,
+    trim: true
   },
   lessons: [{
     type: mongoose.Schema.Types.ObjectId,

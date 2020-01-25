@@ -11,7 +11,8 @@ const lessonSchema = new mongoose.Schema({
     trim: true
   },
   teacher: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Teacher',
     required: true,
   },
   groupOfStudents: {
