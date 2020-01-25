@@ -22,9 +22,9 @@ mongoose.connect(process.env.DB_CONNECTION, {
 
 const fetchLessons =  async () => {
   const lessons = await Lesson.find({});
-  for (let i = 0; i < lessons.length; ++i) {
+  for (const lesson of lessons) {
     try {
-      await lessons[i]
+      await lesson
         .populate({
           path: 'groupOfStudents',
           select: 'name -_id',
@@ -100,15 +100,22 @@ const createGroup = async body => {
   }
 };
 
-
+//TODO: fix bug -> cannot fetch lessons for each group, bcs filter doesn't work properly 
 const fetchGroups = async () => {
   const groups = await Group.find({});
+  // const lessons = await Lesson.find({});
+  // for (const group of groups) {
+  //   group.lessons = lessons.filter(lesson => (console.log(lesson.groupOfStudents === group._id), lesson.groupOfStudents === group._id));
+  // }
   return groups;
 };
 
 const fetchGroupById = async id => {
   try {
     const group = await Group.findById(id);
+    //Findind all lessons for this group
+    const lessons = await Lesson.find({ groupOfStudents: id });
+    group.lessons = lessons;
     return group;
   } catch (err) {
     throw new Error(err);
