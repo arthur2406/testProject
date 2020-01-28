@@ -65,6 +65,8 @@ const teacherSchema = mongoose.Schema({
 });
 
 
+
+
 teacherSchema.methods.generateAuthToken = async function () {
   const teacher = this;
   const token = jwt.sign({ _id: teacher._id.toString() }, process.env.JWT_SECRET);

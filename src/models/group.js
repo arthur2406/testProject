@@ -13,10 +13,6 @@ const groupSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Lesson'
   }],
-  students: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Student'
-  }]
 });
 
 //Delete all lessons before removing group

@@ -1,7 +1,7 @@
 'use strict';
 
 const Group = require('../models/group');
-const Lesson = require('../models/Lesson');
+const Lesson = require('../models/lesson');
 
 //CRUD operations for group
 
@@ -30,6 +30,18 @@ const fetchGroupById = async id => {
     const group = await Group.findById(id);
     //Findind all lessons for this group
     const lessons = await Lesson.find({ groupOfStudents: id });
+    for (const lesson of lessons) {
+      await lesson
+        .populate({
+          path: 'teacher',
+          select: 'name -_id'
+        })
+        .populate({
+          path: 'groupOfStudents',
+          select: 'name -_id'
+        })
+        .execPopulate();
+    }
     group.lessons = lessons;
     return group;
   } catch (err) {

@@ -10,8 +10,8 @@ mongoose.connect(process.env.DB_CONNECTION, {
   useUnifiedTopology: true,
   useFindAndModify: false,
 }).then(() => {
-  console.log('Connected to db');
+  console.log('OK, Connected to db');
 }).catch(() => {
-  console.log('Cannot connect to db!');
+  console.log('Error, cannot connect to db!');
 });
 

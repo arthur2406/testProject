@@ -26,6 +26,10 @@ const fetchLessonById = async id => {
     const lesson = await Lesson.findById(id);
     await lesson
       .populate({
+        path: 'teacher',
+        select: 'name seniority -_id'
+      })
+      .populate({
         path: 'groupOfStudents',
         select: 'name -_id',
       })
@@ -40,6 +44,16 @@ const createLesson = async body => {
   const lesson = new Lesson(body);
   try {
     await lesson.save();
+    await lesson
+      .populate({
+        path: 'teacher',
+        select: 'name seniority -_id'
+      })
+      .populate({
+        path: 'groupOfStudents',
+        select: 'name -_id'
+      })
+      .execPopulate();
     return lesson;
   } catch (err) {
     throw new Error(err);
@@ -54,6 +68,16 @@ const updateLesson = async (id, updatesKeys, updates) => {
     }
     updatesKeys.forEach(updateKey => lesson[updateKey] = updates[updateKey]);
     await lesson.save();
+    await lesson
+      .populate({
+        path: 'teacher',
+        select: 'name seniority -_id'
+      })
+      .populate({
+        path: 'groupOfStudents',
+        select: 'name -_id'
+      })
+      .execPopulate();
     return lesson;
   } catch (err) {
     throw new Error(err);

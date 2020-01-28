@@ -2,7 +2,7 @@
 
 const express = require('express');
 const lessonController = require('../../controllers/lessonController');
-//const auth = require('../../middlewares/auth')
+const auth = require('../../middlewares/auth')
 
 const router = new express.Router();
 
@@ -13,13 +13,13 @@ router.get('/lessons', lessonController.getLessons);
 router.get('/lessons/:id', lessonController.getLessonById);
 
 //POST /lessons
-router.post('/lessons', lessonController.createAndGetLesson);
+router.post('/lessons', auth, lessonController.createAndGetLesson);
 
 //PATCH /lessons/:id
-router.patch('/lessons/:id', lessonController.updateAndGetLesson);
+router.patch('/lessons/:id', auth, lessonController.updateAndGetLesson);
 
 //DELETE /lessons/:id
-router.delete('/lessons/:id', lessonController.deleteAndGetLesson);
+router.delete('/lessons/:id', auth, lessonController.deleteAndGetLesson);
 
 
 

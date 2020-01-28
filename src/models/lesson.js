@@ -1,10 +1,9 @@
 'use strict';
 
-
 const mongoose = require('mongoose');
 
 //Creating a lesson schema
-const lessonSchema = new mongoose.Schema({
+const lessonSchema = mongoose.Schema({
   name: {
     type: String,
     required: true,
