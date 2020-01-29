@@ -1,4 +1,4 @@
-# REST API тестового проекту
+# REST API 
 ---
 **Get lessons**
 ----
