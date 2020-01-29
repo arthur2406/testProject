@@ -33,9 +33,6 @@ const findAuthTeacher = async (id, token) => {
 const findTeacherByCredentials = async (email, password) => {
   try {
     const teacher = await Teacher.findByCredentials(email, password);
-    //finding all lessons for this teacher
-    const lessons = await Lesson.find({ teacher: teacher._id });
-    teacher.lessons = lessons;
     return teacher;
   } catch (err) {
     throw new Error(err);

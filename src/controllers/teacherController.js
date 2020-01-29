@@ -23,7 +23,7 @@ exports.loginAndGetTeacher = async (req, res) => {
     const token = await teacher.generateAuthToken();
     res.send({ teacher, token });
   } catch (err) {
-    res.status(400).send();
+    res.status(400).send({ error: 'Incorrect email or password' });
   }
 };
 
@@ -67,7 +67,7 @@ exports.updateTeacher = async (req, res) => {
 exports.deleteTeacher = async (req, res) => {
   try {
     await req.teacher.remove();
-    res.send(req.teacher);
+    res.send();
   } catch (err) {
     res.status(500).send(err);
   }
@@ -76,12 +76,4 @@ exports.deleteTeacher = async (req, res) => {
 exports.getTeacher = async (req, res) => {
   const populatedTeacher = await populateWithLessons(req.teacher);
   res.send(populatedTeacher);
-  // for (const lesson in req.teacher.lessons) {
-  //   await lesson.populate({
-  //     path: 'Lessons',
-  //     select: 'name -_id'
-  //   })
-  //     .execPopulate();
-  //}
-  //res.send(req.teacher);
 };

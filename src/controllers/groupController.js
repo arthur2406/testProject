@@ -21,7 +21,7 @@ exports.getGroupById = async (req, res) => {
   try {
     const group = await fetchGroupById(_id);
     if (!group) {
-      return res.status(404).send();
+      return res.status(404).send({ error: 'Group is not found!' });
     }
     res.send(group);
   } catch (err) {

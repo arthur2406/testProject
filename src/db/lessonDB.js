@@ -24,6 +24,9 @@ const fetchLessons =  async () => {
 const fetchLessonById = async id => {
   try {
     const lesson = await Lesson.findById(id);
+    if (!lesson) {
+      return undefined;
+    }
     await lesson
       .populate({
         path: 'teacher',

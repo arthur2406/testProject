@@ -15,19 +15,17 @@ const createGroup = async body => {
   }
 };
 
-//TODO: fix bug -> cannot fetch lessons for each group, bcs filter doesn't work properly
 const fetchGroups = async () => {
-  const groups = await Group.find({});
-  // const lessons = await Lesson.find({});
-  // for (const group of groups) {
-  //   group.lessons = lessons.filter(lesson => (console.log(lesson.groupOfStudents === group._id), lesson.groupOfStudents === group._id));
-  // }
+  const groups = await Group.find({}).select('name _id');
   return groups;
 };
 
 const fetchGroupById = async id => {
   try {
     const group = await Group.findById(id);
+    if (!group) {
+      return undefined;
+    }
     //Findind all lessons for this group
     const lessons = await Lesson.find({ groupOfStudents: id });
     for (const lesson of lessons) {

@@ -86,7 +86,7 @@ teacherSchema.methods.toJSON = function () {
 };
 
 teacherSchema.statics.findByCredentials = async (email, password) => {
-  const teacher = await Teacher.findOne({ email });
+  const teacher = await Teacher.findOne({ email }).select('-lessons');
   if (!teacher) {
     throw new Error('Unable to login');
   }

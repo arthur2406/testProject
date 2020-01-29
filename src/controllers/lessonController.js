@@ -15,7 +15,7 @@ exports.getLessonById = async (req, res) => {
   try {
     const lesson = await fetchLessonById(req.params.id);
     if (!lesson) {
-      return res.status(404).send();
+      return res.status(404).send({ error: 'Lesson is not found!'});
     }
     res.send(lesson);
   } catch (err) {
